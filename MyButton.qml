@@ -6,8 +6,9 @@ import QtQuick.Controls 2.2
 Rectangle {
     id: addButton
     property string text
+    property string hoverColor: "#1e6531"
+    property string releaseColor: "#48b261"
     signal clicked
-    color: "red"
     radius: 5
     Text {
         id: addUserText
@@ -17,8 +18,8 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: addButton.clicked()
-        onPressed: parent.color = "green"
-        onReleased: parent.color = "red"
+        onPressed: parent.color = addButton.hoverColor
+        onReleased: parent.color = addButton.releaseColor
     }
 
 }
