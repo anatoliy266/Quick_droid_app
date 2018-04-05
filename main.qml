@@ -5,9 +5,70 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 
 Window {
+    id: mainWindow
     visible: true
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
+    property int count: 0
+
+    onBeforeRendering: {
+        GoB.userNameList()
+    }
+
+    Rectangle {
+        x: 0
+        y: 0
+        width: parent.width
+        height: parent.height-parent.height/6+5
+
+        ScrollView {
+                anchors.fill: parent
+
+                ListView {
+                    id: userList
+                    anchors.fill: parent
+                    model: mainWindow.count
+
+                    delegate: ItemDelegate {
+                        width: parent.width
+
+                        Rectangle {
+                            width: parent.width
+                            height: 50
+                            color: "green"
+                            border.color: "grey"
+
+                            SwipeView {
+                                id: swipeUserInfo
+                                anchors.fill: parent
+                                Page {
+                                    width: 100
+                                    height: 50
+
+                                    Text {
+                                        id: text1
+                                        anchors.centerIn: parent
+                                        text: qsTr("text1")
+                                    }
+                                }
+
+                                Page {
+                                    width: 100
+                                    height: 50
+
+                                    Text {
+                                        id: text2
+                                        anchors.centerIn: parent
+                                        text: qsTr("text2")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
     MyButton {
         id: addButton1
         width: parent.width
@@ -19,6 +80,7 @@ Window {
         hoverColor: "#1e6531"
         onClicked: regUserDialog.open()
     }
+
     Dialog {
 
         id: regUserDialog
@@ -26,11 +88,13 @@ Window {
             id: contentRect
             width: Screen.desktopAvailableWidth-Screen.desktopAvailableWidth/10
             height: Screen.desktopAvailableHeight/3
+
             Text {
                 id: user
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Enter username")
             }
+
             Rectangle {
                 id: textRect
                 width: parent.width-parent.width/20
@@ -41,12 +105,13 @@ Window {
                     color: "grey"
                     width: 2
                 }
+
                 TextInput {
                     id: userName
                     anchors.fill: parent
-                    //onEditingFinished: GoB.getUsername(userName.text)
                 }
             }
+
             MyButton {
                 id: okB
                 width: parent.width/2-1
@@ -57,8 +122,12 @@ Window {
                 border.color: "#48b261"
                 releaseColor: "#48b261"
                 hoverColor: "#1e6531"
-                onClicked: GoB.getUsername(userName.text)
+                onClicked: {
+                    GoB.getUsername(userName.text)
+                    GoB.userNameList()
+                }
             }
+
             MyButton {
                 id: cancelB
                 width: parent.width/2-1
@@ -73,10 +142,14 @@ Window {
             }
         }
     }
+
     Connections {
         target: GoB
         onRecieveUsername: {
-            userName.text = uRecived
+
+        }
+        onRecieveCount: {
+           mainWindow.count = count
         }
     }
 }

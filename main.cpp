@@ -2,9 +2,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "GeneralObject.h"
+#include "model.h"
 
 int main(int argc, char *argv[])
 {
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);

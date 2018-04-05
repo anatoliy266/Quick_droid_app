@@ -2,8 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MyButton.qml</file>
-        <file>UserProp.qml</file>
-        <file>UserInfo.qml</file>
         <file>android/assets/easy.db</file>
     </qresource>
 </RCC>

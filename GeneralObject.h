@@ -17,13 +17,19 @@ class GeneralObject : public QObject
 public:
     explicit GeneralObject(QObject *parent = 0);
     ~GeneralObject();
+    void getUsers();
 signals:
     void recieveUsername(QString uRecived);
+    void recieveCount(int count);
 public slots:
     void getUsername(QString user);
+    void userNameList();
 private:
     QSqlDatabase db;
-
+    int count;
+    QStringList uList;
 };
+
+
 
 #endif // WIDGET_H
