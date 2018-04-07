@@ -21,6 +21,7 @@ public:
 signals:
     void recieveUsername(QString uRecived);
     void recieveCount(int count);
+    void getUsersList(QStringList usersList);
 public slots:
     void getUsername(QString user);
     void userNameList();

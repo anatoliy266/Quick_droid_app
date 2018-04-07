@@ -27,39 +27,168 @@ Window {
                 ListView {
                     id: userList
                     anchors.fill: parent
-                    model: mainWindow.count
+                    model: GmoD
 
                     delegate: ItemDelegate {
                         width: parent.width
+                        height: 70
 
                         Rectangle {
                             width: parent.width
-                            height: 50
+                            height: 70
                             color: "green"
                             border.color: "grey"
 
                             SwipeView {
                                 id: swipeUserInfo
                                 anchors.fill: parent
-                                Page {
-                                    width: 100
-                                    height: 50
 
-                                    Text {
-                                        id: text1
-                                        anchors.centerIn: parent
-                                        text: qsTr("text1")
+                                Page {
+                                    width: Screen.desktopAvailableWidth
+                                    height: 70
+                                    Rectangle {
+                                        anchors.fill: parent
+                                        color: "#3095b8ce"
+
+                                        Text {
+                                            id: text1
+                                            anchors.centerIn: parent
+                                            font.pixelSize: 24
+                                            text: qsTr(name)
+                                            style: Text.Sunken
+                                            font.family: "Verdana"
+                                        }
+
+                                        Rectangle {
+                                            height: 1
+                                            width: parent.width-parent.width/10
+                                            anchors.bottom: parent.bottom
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            color: "grey"
+                                        }
+
+                                        Rectangle {
+                                            height: 1
+                                            width: parent.width-parent.width/10
+                                            anchors.top: parent.top
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            color: "grey"
+                                        }
                                     }
                                 }
 
                                 Page {
-                                    width: 100
-                                    height: 50
+                                    width: Screen.desktopAvailableWidth
+                                    height: 70
 
-                                    Text {
-                                        id: text2
-                                        anchors.centerIn: parent
-                                        text: qsTr("text2")
+                                    Rectangle {
+                                        anchors.fill: parent
+                                        color: "#3095b8ce"
+
+                                        Text {
+                                            anchors.left: parent.left
+                                            anchors.top: parent.top
+                                            id: currentText
+                                            font.pointSize: 20
+                                            text: qsTr("Баланс")
+
+                                        }
+
+                                        Rectangle {
+                                            id: trashBox
+                                            width: parent.height/2
+                                            height: parent.height/2
+                                            anchors.right: parent.right
+                                            anchors.top: parent.top
+
+                                            Image {
+                                                id: trashIm
+                                                anchors.fill: parent
+                                                source: "assets:/images/123.jpg"
+                                            }
+
+                                            MouseArea {
+                                                anchors.fill: parent
+                                                onClicked: delDialog.open()
+                                            }
+                                        }
+
+                                        Dialog {
+                                            id: delDialog
+                                            contentItem: Rectangle {
+                                                width: Screen.desktopAvailableWidth-Screen.desktopAvailableWidth/10
+                                                height: Screen.desktopAvailableHeight/3
+                                                Text {
+                                                    id: delText
+                                                    anchors.top: parent.top
+                                                    width: parent.width
+                                                    height: parent.height/2
+                                                    text: qsTr("Вы действительно хотите удалить этого пользователя? После удаления информацию восстановить невозможно!")
+                                                    wrapMode: Text.WordWrap
+                                                }
+
+                                                MyButton {
+                                                    id: noB
+                                                    width: okB.width
+                                                    height: okB.height
+                                                    anchors.bottom: parent.bottom
+                                                    anchors.right: parent.right
+                                                    text: "No"
+                                                    border.color: "#48b261"
+                                                    releaseColor: "#48b261"
+                                                    hoverColor: "#1e6531"
+                                                    onClicked: delDialog.close()
+                                                }
+
+                                                MyButton {
+                                                    id: yesB
+                                                    width: okB.width
+                                                    height: okB.height
+                                                    anchors.bottom: parent.bottom
+                                                    anchors.left: parent.left
+                                                    text: "Yes"
+                                                    border.color: "#48b261"
+                                                    releaseColor: "#48b261"
+                                                    hoverColor: "#1e6531"
+                                                    onClicked: {}
+                                                }
+                                            }
+                                        }
+
+                                        Rectangle {
+                                            id: free
+                                            color: "green"
+                                            width: parent.width/cur*(cur-off)
+                                            height: parent.height/2
+                                            x: parent.x
+                                            y: parent.y+currentText.y
+                                        }
+
+                                        Rectangle {
+                                            id: off
+                                            color: "red"
+                                            width: parent.width/cur*off
+                                            height: parent.height/2
+                                            x: parent.x+free.x
+                                            y: parent.y+currentText.y
+
+                                        }
+
+                                        Rectangle {
+                                            height: 1
+                                            width: parent.width-parent.width/10
+                                            anchors.bottom: parent.bottom
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            color: "grey"
+                                        }
+
+                                        Rectangle {
+                                            height: 1
+                                            width: parent.width-parent.width/10
+                                            anchors.top: parent.top
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            color: "grey"
+                                        }
                                     }
                                 }
                             }
@@ -125,6 +254,8 @@ Window {
                 onClicked: {
                     GoB.getUsername(userName.text)
                     GoB.userNameList()
+                    GmoD.updateModel()
+                    regUserDialog.close()
                 }
             }
 

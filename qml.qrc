@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>MyButton.qml</file>
         <file>android/assets/easy.db</file>
+        <file>android/assets/images/123.jpg</file>
     </qresource>
 </RCC>

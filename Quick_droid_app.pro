@@ -18,9 +18,11 @@ TARGET = Quick_droid_app
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    GeneralObject.cpp
+    GeneralObject.cpp \
+    generalmodel.cpp
 HEADERS += \
-    GeneralObject.h
+    GeneralObject.h \
+    generalmodel.h
 
 RESOURCES += qml.qrc
 
