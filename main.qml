@@ -362,4 +362,25 @@ Window {
            mainWindow.count = count
         }
     }
+
+        AnimatedImage {
+            width: Screen.desktopAvailableWidth/10
+            height: Screen.desktopAvailableWidth/10
+            x: 0-bird.width
+            y: addButton1.y-bird.width
+            id: bird
+            source: "assets:/images/birddd.gif"
+
+
+            NumberAnimation {
+                target: bird
+                property: "x"
+                duration: 5000
+                from: bird.x
+                to: Screen.desktopAvailableWidth+bird.width
+                easing.type: Easing.OutSine
+                running: true
+                onStopped: {}
+            }
+        }
 }

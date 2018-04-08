@@ -16,6 +16,12 @@ Rectangle {
         anchors.centerIn: parent
         text: addButton.text
     }
+
+    Image {
+        id: borderIm
+        anchors.fill: parent
+        source: "assets:/images/pl.png"
+    }
     MouseArea {
         anchors.fill: parent
         onClicked: addButton.clicked()

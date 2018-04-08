@@ -5,5 +5,7 @@
         <file>android/assets/easy.db</file>
         <file>android/assets/images/123.jpg</file>
         <file>Vallet.qml</file>
+        <file>android/assets/images/menuB.jpg</file>
+        <file>android/assets/images/birddd.gif</file>
     </qresource>
 </RCC>
