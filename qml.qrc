@@ -7,5 +7,9 @@
         <file>Vallet.qml</file>
         <file>android/assets/images/menuB.jpg</file>
         <file>android/assets/images/birddd.gif</file>
+        <file>android/assets/images/cloud.png</file>
+        <file>android/assets/images/tower.png</file>
+        <file>android/assets/images/road.png</file>
+        <file>android/assets/images/torch.png</file>
     </qresource>
 </RCC>

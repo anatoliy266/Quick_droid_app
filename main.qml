@@ -28,14 +28,20 @@ Window {
         ScrollView {
                 anchors.fill: parent
 
+                Image {
+                    id: cloudIm
+                    source: "assets:/images/cloud.png"
+                }
+
                 ListView {
                     id: userList
                     anchors.fill: parent
                     model: GmoD
 
                     delegate: ItemDelegate {
-                        width: Screen.desktopAvailableWidth
+                        width: Screen.desktopAvailableWidth-treeIm.width
                         height: 70
+                        x: treeIm.width
 
                         Rectangle {
                             id: swipeRect
@@ -270,6 +276,22 @@ Window {
                     }
                 }
             }
+        Image {
+            id: treeIm
+            width: Screen.desktopAvailableWidth/4
+            height: Screen.desktopAvailableHeight-addButton1.height*2
+            y: Screen.desktopAvailableHeight-addButton1.height-treeIm.height+10
+            source: "assets:/images/tower.png"
+        }
+
+        Image {
+            id: torchIm
+            width: treeIm.width/4
+            height: treeIm.height/5
+            anchors.bottom: parent.bottom
+            x: 0+treeIm.width*3
+            source: "assets:/images/torch.png"
+        }
     }
 
     MyButton {
@@ -282,6 +304,13 @@ Window {
         color: "#48b261"
         hoverColor: "#1e6531"
         onClicked: regUserDialog.open()
+
+        Image {
+            id: roadIm
+            anchors.top: parent.top
+            width: parent.width
+            source: "assets:/images/road.png"
+        }
     }
 
     Dialog {
@@ -367,20 +396,63 @@ Window {
             width: Screen.desktopAvailableWidth/10
             height: Screen.desktopAvailableWidth/10
             x: 0-bird.width
-            y: addButton1.y-bird.width
+            y: addButton1.y-treeIm.height/2
             id: bird
             source: "assets:/images/birddd.gif"
+        }
 
+        AnimatedImage {
+            width: Screen.desktopAvailableWidth/10
+            height: Screen.desktopAvailableWidth/10
+            x: 0-bird.width
+            y: addButton1.y-treeIm.height
+            id: bird1
+            source: "assets:/images/birdddR.gif"
+        }
+
+        AnimatedImage {
+            width: Screen.desktopAvailableWidth/10
+            height: Screen.desktopAvailableWidth/10
+            x: 0-bird.width
+            y: addButton1.y-treeIm.height/3*2
+            id: bird2
+            source: "assets:/images/birdddR.gif"
+        }
+
+        NumberAnimation {
+            id: flyingBird1
+            target: bird
+            property: "x"
+            duration: 5000
+            from: 0-bird.width
+            to: Screen.desktopAvailableWidth+bird.width
+            easing.type: Easing.OutSine
+            running: true
+            onStopped: seqAnim.running=true
+        }
+
+        ParallelAnimation {
+            id: seqAnim
 
             NumberAnimation {
-                target: bird
+                id: flyingBird2
+                target: bird1
+                property: "x"
+                duration: 6000
+                from: Screen.desktopAvailableWidth+bird.width+100
+                to: 0-bird.width
+                easing.type: Easing.OutSine
+            }
+
+            NumberAnimation {
+                id: flyingBird3
+                target: bird2
                 property: "x"
                 duration: 5000
-                from: bird.x
-                to: Screen.desktopAvailableWidth+bird.width
+                from: Screen.desktopAvailableWidth+bird.width
+                to: 0-bird.width
                 easing.type: Easing.OutSine
-                running: true
-                onStopped: {}
             }
+            onStopped: flyingBird1.running=true
         }
 }
