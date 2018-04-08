@@ -13,14 +13,18 @@ Window {
 
     onBeforeRendering: {
         GoB.userNameList()
+        generalVallet.showed=false
     }
 
     Rectangle {
+        id: userBlock
+        anchors.fill: parent
+
+        Rectangle {
         x: 0
         y: 0
         width: parent.width
         height: parent.height-parent.height/6+5
-
         ScrollView {
                 anchors.fill: parent
 
@@ -30,13 +34,14 @@ Window {
                     model: GmoD
 
                     delegate: ItemDelegate {
-                        width: parent.width
+                        width: Screen.desktopAvailableWidth
                         height: 70
 
                         Rectangle {
+                            id: swipeRect
                             width: parent.width
                             height: 70
-                            color: "green"
+                            color: "#3095b8ce"
                             border.color: "grey"
 
                             SwipeView {
@@ -47,6 +52,7 @@ Window {
                                     width: Screen.desktopAvailableWidth
                                     height: 70
                                     Rectangle {
+                                        id: userrPage
                                         anchors.fill: parent
                                         color: "#3095b8ce"
 
@@ -75,13 +81,35 @@ Window {
                                             color: "grey"
                                         }
                                     }
+                                    MouseArea {
+                                        width: swipeRect.width
+                                        height: swipeRect.height
+                                        x: swipeRect.x
+                                        y: swipeRect.y
+                                        onDoubleClicked: {
+                                            userBlock.visible=false
+                                            generalVallet.visible=true
+                                            generalVallet._id=id
+                                        }
+                                        onPressed: {
+                                            userrPage.color= "#30294c5f"
+                                            valetPage.color= "#30294c5f"
+                                        }
+                                        onReleased: {
+                                            userrPage.color= "#3095b8ce"
+                                            valetPage.color= "#3095b8ce"
+                                        }
+
+                                    }
                                 }
 
                                 Page {
+
                                     width: Screen.desktopAvailableWidth
                                     height: 70
 
                                     Rectangle {
+                                        id: valetPage
                                         anchors.fill: parent
                                         color: "#3095b8ce"
 
@@ -90,28 +118,34 @@ Window {
                                             anchors.top: parent.top
                                             id: currentText
                                             font.pointSize: 20
-                                            text: qsTr("Баланс")
+                                            text: qsTr("Баланс:  ")
+                                        }
 
+                                        Text {
+                                            anchors.top: parent.top
+                                            anchors.left: currentText.right
+                                            font.pointSize: 20
+                                            text: cur
                                         }
 
                                         Rectangle {
                                             id: trashBox
-                                            width: parent.height/2
-                                            height: parent.height/2
+                                            width: currentText.height*3/2
+                                            height: currentText.height
                                             anchors.right: parent.right
                                             anchors.top: parent.top
 
                                             Image {
                                                 id: trashIm
                                                 anchors.fill: parent
-                                                source: "assets:/images/123.jpg"
+                                                source: "assets:/images/menuB.jpg"
                                             }
 
                                             MouseArea {
                                                 anchors.fill: parent
                                                 onClicked: delDialog.open()
                                             }
-                                        }
+                                        } 
 
                                         Dialog {
                                             id: delDialog
@@ -150,29 +184,17 @@ Window {
                                                     border.color: "#48b261"
                                                     releaseColor: "#48b261"
                                                     hoverColor: "#1e6531"
-                                                    onClicked: {}
+                                                    onClicked: {
+                                                        GoB.delUser(id)
+                                                        GoB.userNameList()
+                                                        GmoD.updateModel()
+                                                        delDialog.close()
+                                                    }
                                                 }
                                             }
                                         }
 
-                                        Rectangle {
-                                            id: free
-                                            color: "green"
-                                            width: parent.width/cur*(cur-off)
-                                            height: parent.height/2
-                                            x: parent.x
-                                            y: parent.y+currentText.y
-                                        }
 
-                                        Rectangle {
-                                            id: off
-                                            color: "red"
-                                            width: parent.width/cur*off
-                                            height: parent.height/2
-                                            x: parent.x+free.x
-                                            y: parent.y+currentText.y
-
-                                        }
 
                                         Rectangle {
                                             height: 1
@@ -189,6 +211,58 @@ Window {
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             color: "grey"
                                         }
+
+                                        Rectangle {
+                                            id: free
+                                            color: "green"
+                                            width: (parent.width)/cur*(cur-spent)
+                                            height: parent.height-currentText.height
+                                            anchors.left: parent.left
+                                            anchors.bottom: parent.bottom
+                                            radius: 5
+
+                                            Text {
+                                                id: freeMoneyG
+                                                anchors.centerIn: parent
+                                                text: cur-spent
+                                            }
+                                        }
+
+                                        Rectangle {
+                                            id: off
+                                            color: "red"
+                                            width: (parent.width)/cur*spent
+                                            height: parent.height-currentText.height
+                                            anchors.left: free.right
+                                            anchors.bottom: parent.bottom
+                                            radius: 5
+
+                                            Text {
+                                                id: offMoneyG
+                                                anchors.centerIn: parent
+                                                text: spent
+                                            }
+                                        }
+                                    }
+                                    MouseArea {
+                                        width: swipeRect.width-trashBox.width
+                                        height: swipeRect.height
+                                        x: swipeRect.x
+                                        y: swipeRect.y
+                                        onDoubleClicked: {
+                                            userBlock.visible=false
+                                            generalVallet.visible=true
+                                            generalVallet._id=id
+                                        }
+                                        onPressed: {
+                                            userrPage.color= "#30294c5f"
+                                            valetPage.color= "#30294c5f"
+                                        }
+                                        onReleased: {
+                                            userrPage.color= "#3095b8ce"
+                                            valetPage.color= "#3095b8ce"
+                                        }
+
                                     }
                                 }
                             }
@@ -272,6 +346,11 @@ Window {
                 onClicked: regUserDialog.close()
             }
         }
+    }
+}
+
+    Vallet {
+        id: generalVallet
     }
 
     Connections {

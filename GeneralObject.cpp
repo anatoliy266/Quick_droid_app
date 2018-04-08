@@ -60,4 +60,10 @@ void GeneralObject::getUsers()
     emit getUsersList(userList);
 }
 
-
+void GeneralObject::delUser(int id)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM users WHERE _id in (:id)");
+    query.bindValue(":id", id);
+    query.exec();
+}

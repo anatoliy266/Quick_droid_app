@@ -23,7 +23,7 @@ QHash<int, QByteArray> GeneralModel::roleNames() const
     roles[idRole] = "id";
     roles[nameRole] = "name";
     roles[freeRole] = "cur";
-    roles[outRole] = "off";
+    roles[outRole] = "spent";
     return roles;
 }
 void GeneralModel::updateModel()

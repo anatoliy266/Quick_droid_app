@@ -10,6 +10,7 @@ Rectangle {
     property string releaseColor: "#48b261"
     signal clicked
     radius: 5
+    color: "#48b261"
     Text {
         id: addUserText
         anchors.centerIn: parent

@@ -25,6 +25,7 @@ signals:
 public slots:
     void getUsername(QString user);
     void userNameList();
+    void delUser(int id);
 private:
     QSqlDatabase db;
     int count;
