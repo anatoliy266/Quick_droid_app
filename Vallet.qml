@@ -3,54 +3,46 @@ import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
+import QtMultimedia 5.9
 
 Rectangle {
     property int _id
     property bool showed
-    width: parent.width-5
-    height: parent.height-10
-    x: 5
-    y: 5
+    width: parent.width
+    height: parent.height
     visible: false
 
+    Image {
+        id: taskBIm
+        anchors.top: parent.top
+        source: "assets:/images/taskB.png"
+    }
+
     Rectangle {
-        id: scrollRect
-        width: (parent.width-parent.width/5)-5
-        height: parent.height
+        id: valStat
+        width: parent.width/5
+        height: parent.height-taskBIm.height-5
+        x: parent.width-parent.width/5-5
+        y: taskBIm.height + 5
+        color: "blue"
+        radius: 5
 
-        ScrollView {
-            anchors.fill: parent
-
-            Rectangle {
-                id: cont
-                width: parent.width-5
-                height: parent.height/4
-                color: "green"
-                radius: 4
-            }
-
-            Rectangle {
-                id: cont1
-                width: parent.width-5
-                height: parent.height/4
-                x: cont.x
-                y: cont.height+5
-
-                color: "green"
-                radius: 4
-            }
+        ListView {
+            id: stat
         }
     }
 
     Rectangle {
+        id: cameraB
         width: parent.width/5
-        height: parent.height
-        x: cont.width+5
-        color: "blue"
-        radius: 4
+        height: parent.width/5
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: parent.height-cameraB.height
+        color: "green"
 
-        ListView {
-            id:valletStat
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {cameraView.visible = true}
         }
     }
 }

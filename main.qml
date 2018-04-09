@@ -55,7 +55,7 @@ Window {
                                 anchors.fill: parent
 
                                 Page {
-                                    width: Screen.desktopAvailableWidth
+                                    width: Screen.desktopAvailableWidth-treeIm.width
                                     height: 70
                                     Rectangle {
                                         id: userrPage
@@ -65,7 +65,7 @@ Window {
                                         Text {
                                             id: text1
                                             anchors.centerIn: parent
-                                            font.pixelSize: 24
+                                            font.pixelSize: 20
                                             text: qsTr(name)
                                             style: Text.Sunken
                                             font.family: "Verdana"
@@ -111,7 +111,7 @@ Window {
 
                                 Page {
 
-                                    width: Screen.desktopAvailableWidth
+                                    width: Screen.desktopAvailableWidth-treeIm.width
                                     height: 70
 
                                     Rectangle {
@@ -130,7 +130,7 @@ Window {
                                         Text {
                                             anchors.top: parent.top
                                             anchors.left: currentText.right
-                                            font.pointSize: 20
+                                            font.pointSize: 16
                                             text: cur
                                         }
 
@@ -309,6 +309,7 @@ Window {
             id: roadIm
             anchors.top: parent.top
             width: parent.width
+            height: parent.height/3
             source: "assets:/images/road.png"
         }
     }
@@ -376,10 +377,78 @@ Window {
             }
         }
     }
+    AnimatedImage {
+        width: Screen.desktopAvailableWidth/10
+        height: Screen.desktopAvailableWidth/10
+        x: 0-bird.width
+        y: addButton1.y-treeIm.height/2
+        id: bird
+        source: "assets:/images/birddd.gif"
+    }
+
+    AnimatedImage {
+        width: Screen.desktopAvailableWidth/10
+        height: Screen.desktopAvailableWidth/10
+        x: 0-bird.width
+        y: addButton1.y-treeIm.height
+        id: bird1
+        source: "assets:/images/birdddR.gif"
+    }
+
+    AnimatedImage {
+        width: Screen.desktopAvailableWidth/10
+        height: Screen.desktopAvailableWidth/10
+        x: 0-bird.width
+        y: addButton1.y-treeIm.height/3*2
+        id: bird2
+        source: "assets:/images/birdddR.gif"
+    }
+
+    NumberAnimation {
+        id: flyingBird1
+        target: bird
+        property: "x"
+        duration: 5000
+        from: 0-bird.width
+        to: Screen.desktopAvailableWidth+bird.width
+        easing.type: Easing.OutSine
+        running: true
+        onStopped: seqAnim.running=true
+    }
+
+    ParallelAnimation {
+        id: seqAnim
+
+        NumberAnimation {
+            id: flyingBird2
+            target: bird1
+            property: "x"
+            duration: 6000
+            from: Screen.desktopAvailableWidth+bird.width+100
+            to: 0-bird.width
+            easing.type: Easing.OutSine
+        }
+
+        NumberAnimation {
+            id: flyingBird3
+            target: bird2
+            property: "x"
+            duration: 5000
+            from: Screen.desktopAvailableWidth+bird.width
+            to: 0-bird.width
+            easing.type: Easing.OutSine
+        }
+        onStopped: flyingBird1.running=true
+    }
 }
 
     Vallet {
         id: generalVallet
+    }
+
+    CameraView {
+        id: cameraView
+        visible: false
     }
 
     Connections {
@@ -392,67 +461,5 @@ Window {
         }
     }
 
-        AnimatedImage {
-            width: Screen.desktopAvailableWidth/10
-            height: Screen.desktopAvailableWidth/10
-            x: 0-bird.width
-            y: addButton1.y-treeIm.height/2
-            id: bird
-            source: "assets:/images/birddd.gif"
-        }
 
-        AnimatedImage {
-            width: Screen.desktopAvailableWidth/10
-            height: Screen.desktopAvailableWidth/10
-            x: 0-bird.width
-            y: addButton1.y-treeIm.height
-            id: bird1
-            source: "assets:/images/birdddR.gif"
-        }
-
-        AnimatedImage {
-            width: Screen.desktopAvailableWidth/10
-            height: Screen.desktopAvailableWidth/10
-            x: 0-bird.width
-            y: addButton1.y-treeIm.height/3*2
-            id: bird2
-            source: "assets:/images/birdddR.gif"
-        }
-
-        NumberAnimation {
-            id: flyingBird1
-            target: bird
-            property: "x"
-            duration: 5000
-            from: 0-bird.width
-            to: Screen.desktopAvailableWidth+bird.width
-            easing.type: Easing.OutSine
-            running: true
-            onStopped: seqAnim.running=true
-        }
-
-        ParallelAnimation {
-            id: seqAnim
-
-            NumberAnimation {
-                id: flyingBird2
-                target: bird1
-                property: "x"
-                duration: 6000
-                from: Screen.desktopAvailableWidth+bird.width+100
-                to: 0-bird.width
-                easing.type: Easing.OutSine
-            }
-
-            NumberAnimation {
-                id: flyingBird3
-                target: bird2
-                property: "x"
-                duration: 5000
-                from: Screen.desktopAvailableWidth+bird.width
-                to: 0-bird.width
-                easing.type: Easing.OutSine
-            }
-            onStopped: flyingBird1.running=true
-        }
 }

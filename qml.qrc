@@ -11,5 +11,8 @@
         <file>android/assets/images/tower.png</file>
         <file>android/assets/images/road.png</file>
         <file>android/assets/images/torch.png</file>
+        <file>android/assets/images/taskB.png</file>
+        <file>android/assets/images/ticket.png</file>
+        <file>CameraView.qml</file>
     </qresource>
 </RCC>
