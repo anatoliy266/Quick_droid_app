@@ -19,10 +19,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     GeneralObject.cpp \
-    generalmodel.cpp
+    generalmodel.cpp \
+    checkscan.cpp
 HEADERS += \
     GeneralObject.h \
-    generalmodel.h
+    generalmodel.h \
+    checkscan.h
 
 RESOURCES += qml.qrc
 
@@ -38,4 +40,8 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    android-sourses/AndroidManifest.xml \
+    android/assets/AndroidManifest.xml
 

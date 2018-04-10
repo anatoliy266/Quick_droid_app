@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.9
 
+
 Rectangle {
     property int _id
     property bool showed

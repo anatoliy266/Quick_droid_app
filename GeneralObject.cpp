@@ -12,6 +12,30 @@ GeneralObject::GeneralObject(QObject *parent) :
              dfile.copy("./easy.db");
              QFile::setPermissions("./easy.db",QFile::WriteOwner | QFile::ReadOwner);
         }
+    } else {
+        QString new_name = QStandardPaths::locate(QStandardPaths::DownloadLocation, "easy.db", QStandardPaths::LocateFile);
+        QFile newDBfile(new_name);
+
+        if (newDBfile.exists())
+        {
+            dbfile.remove();
+            bool coppy = newDBfile.copy("./easy.db");
+            QFile::setPermissions("./easy.db",QFile::WriteOwner | QFile::ReadOwner);
+            QFile::setPermissions(new_name,QFile::WriteOwner | QFile::ReadOwner);
+
+
+            newDBfile.close();
+            if (coppy)
+            {
+                QString new_name1 = QStandardPaths::locate(QStandardPaths::DownloadLocation, "easy.db", QStandardPaths::LocateFile);
+                QFile newDBfile1(new_name1);
+                QFileInfo fileinfo(newDBfile1);
+                QDir filedir = fileinfo.dir();
+                newDBfile1.remove();
+                filedir.remove(newDBfile1);
+            }
+
+        }
     }
 
     db = QSqlDatabase::addDatabase("QSQLITE");

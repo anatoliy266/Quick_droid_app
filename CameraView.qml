@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.9
+//import ChekScan 1.0
 
 Rectangle {
     id: cameraArea
@@ -29,7 +30,8 @@ Rectangle {
 
             exposure {
                 exposureCompensation: -1.0
-                exposureMode: Camera.ExposurePortrait
+                exposureMode: Camera.ExposureAuto
+                //iso: 3200
             }
 
             flash.mode: Camera.FlashRedEyeReduction
@@ -37,6 +39,7 @@ Rectangle {
             imageCapture {
                 onImageCaptured: {
                     photoPreview.source = preview
+                    //chekScan.getChek(preview)
                 }
             }
     }
