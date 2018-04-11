@@ -19,22 +19,15 @@ GeneralObject::GeneralObject(QObject *parent) :
         if (newDBfile.exists())
         {
             dbfile.remove();
-            bool coppy = newDBfile.copy("./easy.db");
+            newDBfile.rename(new_name, "./easy.db");
             QFile::setPermissions("./easy.db",QFile::WriteOwner | QFile::ReadOwner);
-            QFile::setPermissions(new_name,QFile::WriteOwner | QFile::ReadOwner);
-
-
-            newDBfile.close();
-            if (coppy)
+            /*if (coppy)
             {
                 QString new_name1 = QStandardPaths::locate(QStandardPaths::DownloadLocation, "easy.db", QStandardPaths::LocateFile);
                 QFile newDBfile1(new_name1);
-                QFileInfo fileinfo(newDBfile1);
-                QDir filedir = fileinfo.dir();
-                newDBfile1.remove();
-                filedir.remove(newDBfile1);
-            }
-
+                QFile::setPermissions(newDBfile1.fileName(),QFile::WriteOwner);
+                newDBfile1.rename("easy.db", "easy.txt");
+            }*/
         }
     }
 

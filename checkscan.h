@@ -1,5 +1,5 @@
-/*#ifndef CHECKSCAN_H
-#define CHECKSCAN_H
+#ifndef CHEKSCAN_H
+#define CHEKSCAN_H
 
 #include <QObject>
 #include <QImage>
@@ -7,8 +7,9 @@
 #include <QtQml/QQmlContext>
 #include <QtQuick/QQuickImageProvider>
 #include <QtQml/QQmlImageProviderBase>
-#include <QGuiApplication>
+#include <QApplication>
 #include <QPixmap>
+#include <iostream>
 
 class ChekScan : public QObject
 {
@@ -25,5 +26,5 @@ public slots:
 private:
 };
 
-#endif // CHECKSCAN_H
-*/
+#endif // CHEKSCAN_H
+

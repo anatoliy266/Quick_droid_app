@@ -4,7 +4,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.9
-//import ChekScan 1.0
 
 Rectangle {
     id: cameraArea
@@ -39,7 +38,7 @@ Rectangle {
             imageCapture {
                 onImageCaptured: {
                     photoPreview.source = preview
-                    //chekScan.getChek(preview)
+                    ChN.getChek(preview)
                 }
             }
     }

@@ -13,12 +13,13 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     GeneralObject GoB;
     GeneralModel GmoD;
-    //ChekScan ChN;
+    ChekScan ChN;
     QQmlApplicationEngine engine;
     QQmlContext *context = engine.rootContext();
     context->setContextProperty("GoB", &GoB);
     context->setContextProperty("GmoD", &GmoD);
-    //qmlRegisterType<ChekScan>("ChekScan", 1, 0, "ChekScan");
+    context->setContextProperty("ChN", &ChN);
+    //qmlRegisterType<ChekScan>("ChekScan", 1, 0, "chekScan");
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

@@ -1,4 +1,5 @@
-/*#include "checkscan.h"
+#include "checkscan.h"
+#include <QMessageBox>
 
 ChekScan::ChekScan(QObject *parent) : QObject(parent)
 {
@@ -15,7 +16,7 @@ void ChekScan::getChek(QString& path)
     QUrl imageUrl(path);
     QQmlEngine* engine = QQmlEngine::contextForObject(this)->engine();
     QQmlImageProviderBase* imageProviderBase = engine->imageProvider(imageUrl.host());
-    QQuickImageProvider* imageProvider = static_cast<QQuickImageProvider>(imageProviderBase);
+    QQuickImageProvider* imageProvider = static_cast <QQuickImageProvider*>(imageProviderBase);
     QSize imageSize;
     QString imageId = imageUrl.path().remove(0,1);
     QImage image = imageProvider->requestImage(imageId, &imageSize, imageSize);
@@ -42,4 +43,4 @@ void ChekScan::catChek(QImage img)
         }
     }
 }
-*/
+
