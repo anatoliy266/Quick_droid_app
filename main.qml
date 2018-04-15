@@ -61,6 +61,7 @@ Window {
                                         id: userrPage
                                         anchors.fill: parent
                                         color: "#3095b8ce"
+                                        antialiasing: true
 
                                         Text {
                                             id: text1
@@ -77,6 +78,7 @@ Window {
                                             anchors.bottom: parent.bottom
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             color: "grey"
+                                            antialiasing: true
                                         }
 
                                         Rectangle {
@@ -85,6 +87,7 @@ Window {
                                             anchors.top: parent.top
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             color: "grey"
+                                            antialiasing: true
                                         }
                                     }
                                     MouseArea {
@@ -144,6 +147,7 @@ Window {
                                             Image {
                                                 id: trashIm
                                                 anchors.fill: parent
+                                                antialiasing: true
                                                 source: "assets:/images/menuB.jpg"
                                             }
 
@@ -208,6 +212,7 @@ Window {
                                             anchors.bottom: parent.bottom
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             color: "grey"
+                                            antialiasing: true
                                         }
 
                                         Rectangle {
@@ -216,6 +221,7 @@ Window {
                                             anchors.top: parent.top
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             color: "grey"
+                                            antialiasing: true
                                         }
 
                                         Rectangle {
@@ -226,6 +232,7 @@ Window {
                                             anchors.left: parent.left
                                             anchors.bottom: parent.bottom
                                             radius: 5
+                                            antialiasing: true
 
                                             Text {
                                                 id: freeMoneyG
@@ -242,6 +249,7 @@ Window {
                                             anchors.left: free.right
                                             anchors.bottom: parent.bottom
                                             radius: 5
+                                            antialiasing: true
 
                                             Text {
                                                 id: offMoneyG
@@ -281,6 +289,7 @@ Window {
             width: Screen.desktopAvailableWidth/4
             height: Screen.desktopAvailableHeight-addButton1.height*2
             y: Screen.desktopAvailableHeight-addButton1.height-treeIm.height+10
+            antialiasing: true
             source: "assets:/images/tower.png"
         }
 
@@ -290,6 +299,7 @@ Window {
             height: treeIm.height/5
             anchors.bottom: parent.bottom
             x: 0+treeIm.width*3
+            antialiasing: true
             source: "assets:/images/torch.png"
         }
     }
@@ -307,6 +317,7 @@ Window {
 
         Image {
             id: roadIm
+            antialiasing: true
             anchors.top: parent.top
             width: parent.width
             height: parent.height/3
@@ -383,6 +394,7 @@ Window {
         x: 0-bird.width
         y: addButton1.y-treeIm.height/2
         id: bird
+        antialiasing: true
         source: "assets:/images/birddd.gif"
     }
 
@@ -392,6 +404,7 @@ Window {
         x: 0-bird.width
         y: addButton1.y-treeIm.height
         id: bird1
+        antialiasing: true
         source: "assets:/images/birdddR.gif"
     }
 
@@ -401,6 +414,7 @@ Window {
         x: 0-bird.width
         y: addButton1.y-treeIm.height/3*2
         id: bird2
+        antialiasing: true
         source: "assets:/images/birdddR.gif"
     }
 

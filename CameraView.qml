@@ -37,8 +37,8 @@ Rectangle {
 
             imageCapture {
                 onImageCaptured: {
-                    photoPreview.source = preview
-                    ChN.getChek(preview)
+                    chP.getPath(preview)
+                    photoPreview.source = "image:/CChek/image"
                 }
             }
     }

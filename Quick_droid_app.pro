@@ -20,11 +20,15 @@ TEMPLATE = app
 SOURCES += main.cpp \
     GeneralObject.cpp \
     generalmodel.cpp \
-    checkscan.cpp
+    checkscan.cpp \
+    checkimageprovider.cpp \
+    chekpath.cpp
 HEADERS += \
     GeneralObject.h \
     generalmodel.h \
-    checkscan.h
+    checkscan.h \
+    checkimageprovider.h \
+    chekpath.h
 
 RESOURCES += qml.qrc
 

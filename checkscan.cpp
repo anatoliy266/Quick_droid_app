@@ -11,7 +11,7 @@ ChekScan::~ChekScan()
 
 }
 
-void ChekScan::getChek(QString& path)
+QImage ChekScan::getChek(QString path)
 {
     QUrl imageUrl(path);
     QQmlEngine* engine = QQmlEngine::contextForObject(this)->engine();
@@ -23,6 +23,7 @@ void ChekScan::getChek(QString& path)
     if( !image.isNull()) {
         catChek(image);
     }
+    return image;
 }
 
 void ChekScan::catChek(QImage img)
@@ -42,5 +43,6 @@ void ChekScan::catChek(QImage img)
             }
         }
     }
+
 }
 

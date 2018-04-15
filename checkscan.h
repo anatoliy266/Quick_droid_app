@@ -17,12 +17,8 @@ class ChekScan : public QObject
 public:
     explicit ChekScan(QObject *parent = nullptr);
     ~ChekScan();
+    QImage getChek(QString path);
     void catChek(QImage img);
-signals:
-    void returnImg(QImage image);
-public slots:
-    void getChek(QString &path);
-
 private:
 };
 
